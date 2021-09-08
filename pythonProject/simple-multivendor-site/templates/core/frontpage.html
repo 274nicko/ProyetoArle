@@ -1,0 +1,65 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Home Page{% endblock title %}
+{% block content %}
+{% load static %}
+{% block scripts %}
+{% endblock scripts %}
+<div class="container-slider">
+        <div class="slider" id="slider">
+            <div class="slider__section">
+                <img src="{% static 'img/1.jpg '%}" alt="" class="slider__img">
+                <div class="slider__content">
+                    <h2 class="slider__title">ART</h2>
+                    <p class="slider__txt"></p>
+                    <a href="{% url 'core:home' %}" class="btn-shop">SHOP NOW</a>
+                </div>
+            </div>
+                <div class="slider__section">
+                <img src="{% static 'img/2.jpg'%}" alt="" class="slider__img">
+                <div class="slider__content">
+                    <h2 class="slider__title">ART</h2>
+                    <p class="slider__txt"></p>
+                    <a href="{% url 'core:home' %}" class="btn-shop">SHOP NOW</a>
+                </div>
+                </div>
+                <div class="slider__section">
+                <img src="{% static 'img/3.jpg'%}" alt="" class="slider__img">
+                <div class="slider__content">
+                    <h2 class="slider__title">ART</h2>
+                    <p class="slider__txt"></p>
+                    <a href="{% url 'core:home' %}" class="btn-shop">SHOP NOW</a>
+                </div>
+                </div>
+                <div class="slider__section">
+                <img src="{% static 'img/4.jpg'%}" alt="" class="slider__img">
+                <div class="slider__content">
+                    <h2 class="slider__title">ART</h2>
+                    <p class="slider__txt"></p>
+                    <a href="{% url 'core:home' %}" class="btn-shop">SHOP NOW</a>
+                </div>
+                </div>
+                <div class="slider__section">
+                <img src="{% static 'img/5.jpg'%}" alt="" class="slider__img">
+                <div class="slider__content">
+                    <h2 class="slider__title">ART</h2>
+                    <p class="slider__txt"></p>
+                    <a href="{% url 'core:home' %}" class="btn-shop">SHOP NOW</a>
+                </div>
+            </div>
+        </div>
+    <div class="slider__btn slider__btn--right" id="btn-right">&#62</div>
+    <div class="slider__btn slider__btn--left" id="btn-left">&#60</div>
+</div>
+
+    <main class="main">
+        <h2 class="main-title">Todos Los Productos</h2>
+        <section class="container-products">
+
+        {% for product in newest_products %}
+            {% include 'product/parts/list_item.html' %}
+        {% endfor %}
+
+        </section>
+    </main>
+{% endblock content %}

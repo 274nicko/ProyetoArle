@@ -1,0 +1,9 @@
+
+<div class="product">
+              <img src="{{ product.get_thumbnail }}" alt="{{product.title}}" class="product__img">
+              <div class="product__description">
+                <h3 class="product__title">{{product.title}}</h3>
+                <span class="product__price">${{product.price}}</span>
+              </div>
+              <a href="{% url 'product:product' product.category.slug product.slug %}"><i class="product__icon fas fa-cart-plus"></i></a>
+</div>

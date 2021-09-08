@@ -1,0 +1,119 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}Jūjutsu{% endblock title %} </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body>
+
+    <header class="main-header">
+
+        <div class="container container--flex">
+          <div class="main-header__container">
+            <h1 class="main-header__title">CLOTINGAD</h1>
+            <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
+            <nav class="main-nav" id="main-nav">
+              <ul class="menu">
+                <li class="menu__item"><a href="{% url 'core:home' %}" class="menu__link">HOME</a></li>
+                  {% if request.user.is_authenticated %}
+                <li class="menu__item"><a href="{% url 'vendor:vendor-admin' %}" class="menu__link"><i class="far fa-user-circle"></i>PERFIL</a>
+                  <ul class="menu2">
+                    <li class="menu__bajo"><a href="{% url 'vendor:edit-vendor' %}" class="menu__link"><i class="far fa-id-badge"></i> {{user.vendor.name}}</a></li>
+                    <li class="menu__bajo"><a href="{% url 'vendor:logout' %}" class="menu__link"><i class="fas fa-door-open"></i> Salir</a></li>
+                  </ul>
+                </li>
+                <li class="menu__item"><a href="{% url 'vendor:add-product' %}" class="menu__link"><i class="far fa-lightbulb"></i>PRODUCTOS</a></li>
+                   {% endif %}
+
+                <li class="menu__item"><a href="" class="menu__link"><i class="fas fa-tshirt"></i>VENDEDORES</a>
+                <ul class="menu2">
+                    <li class="menu__bajo"><a href="{% url 'vendor:vendors' %}" class="menu__link"><i class="fas fa-users"></i>Todos Los Vendedores</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li class="menu__bajo"><a href="{% url 'vendor:vendor-admin' %}" class="menu__link"><i class="fas fa-user-cog"></i> Vendor Admin</a></li>
+                    {% else %}
+                    <li class="menu__bajo"><a href="{% url 'vendor:become-vendor' %}" class="menu__link"><i class="fas fa-user-tag"></i>Bienvenido Vendedor</a></li>
+                    {% endif %}
+                </ul>
+                </li>
+                <li class="menu__item"><a href="#" class="menu__link">CONTACTO</a>
+                  <ul class="menu2">
+                    <li class="menu__bajo"><a href="http://" class="menu__link"><i class="fab fa-whatsapp"></i> Whatsapp</a></li>
+                    <li class="menu__bajo"><a href="http://" class="menu__link"><i class="far fa-envelope"></i> Correo</a></li>
+                    <li class="menu__bajo"><a href="http://" class="menu__link"><i class="fas fa-phone"></i> Numero</a></li>
+                </ul>
+                </li>
+                <li class="menu__item"><a href="#" class="menu__link"><i class="far fa-clipboard"></i>CATEGORIAS</a>
+                  <ul class="menu2">
+                      {% for category in categories %}
+                    <li class="menu__bajo"><a href="{% url 'product:category' category.slug %}" class="menu__link"><i class="fas fa-cubes"></i> {{category.title}}</a></li>
+                         {% endfor %}
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="main-header__container">
+            <span class="main-header__txt">Need Help</span>
+            <p class="main-header__txt"><i class="fas fa-phone"></i> Call 12345678099</p>
+          </div>
+            {% if request.user.is_authenticated %}
+             {% else %}
+          <div class="main-header__container">
+            <a href="{% url 'vendor:login' %}" class="main-header__link"><i class="fas fa-user"></i></a>
+            <a href="{% url 'vendor:become-vendor' %}" class="main-header__link"><i class="fas fa-user-plus"></i></a>
+              {% endif %}
+            <a  href="{% url 'cart:cart' %}" class="main-header__btn">My cart {% if cart %}({{cart|length}}){% endif %}<i class="fas fa-shopping-cart"></i></a>
+              <form method="get" action="{% url 'product:search' %}">
+                <input type="search" name="query" id="" class="main-header__input " placeholder="Buscar..."><i class="fas fa-search"></i>
+              </form>
+          </div>
+        </div>
+      </header>
+
+        <div class="container">
+
+            {% block content %}{% endblock content %}
+
+        </div>
+
+    <footer class="main-footer">
+        <div class="footer__section">
+          <h2 class="footer__title">About Us</h2>
+          <p class="footer__txt">Curabitur non nulla sit amet nislinit tempus convallis quis ac lectus. lac inia eget consectetur sed, convallis at tellus. Nulla porttitor accumsana tincidunt.</p>
+        </div>
+        <div class="footer__section">
+          <h2 class="footer__title">Location :</h2>
+          <p class="footer__txt">0926k 4th block building, king Avenue, New York City</p>
+          <h2 class="footer__title">Contact</h2>
+          <p class="footer__txt">Phone : +121 098 8907 9987</p>
+          <p class="footer__txt">Email : info@example.com</p>
+        </div>
+        <div class="footer__section">
+          <h2 class="footer__title">Quick Links</h2>
+          <a href="" class="footer__link">Home</a>
+          <a href="" class="footer__link">About</a>
+          <a href="" class="footer__link">Error</a>
+          <a href="" class="footer__link">Shop</a>
+          <a href="" class="footer__link">Contact Us</a>
+        </div>
+        <div class="footer__section">
+          <h2 class="footer__title">Sign up for your offers</h2>
+          <p class="footer__txt">By subscribing to our mailing list you will always get latest news and updates from us.</p>
+          <input type="email" class="footer__input" placeholder="Enter your email">
+        </div>
+        <p class="copy">© 2021 Goggles. All Rights Reserved | CLOTING</p>
+      </footer>
+    <script src="{% static 'js/slider.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block scripts %}
+    {% endblock scripts %}
+
+</body>
+</html>

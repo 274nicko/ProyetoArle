@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Vendor Login{% endblock title %}
+{% block css%}
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+{% endblock css%}
+{% block content %}
+<div class="align">
+    <div class="row">
+            <div class="card">
+                <div class="card-body">
+                        <h1 class="title">Vendor Login</h1>
+
+                        <form method="post" action="">
+                            {% csrf_token %}
+
+                            {{ form.as_p }}
+
+                            <div class="field">
+                                <div class="control">
+                                    <button class="btn btn-outline-dark">LogIn</button>
+                                    <button href="{% url 'core:home' %}" class="btn btn-outline-danger">Cancelar</button>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+</div>
+{% endblock content %}

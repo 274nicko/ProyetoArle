@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{category.title}}{% endblock title %}
+
+{% block content %}
+
+    <main class="main">
+         <h2 class="main-title">{{category.title}}</h2>
+        <section class="container-products">
+
+        {% for product in category.products.all %}
+            {% include 'product/parts/list_item.html' %}
+        {% endfor %}
+        </section>
+    </main>
+{% endblock content %}
